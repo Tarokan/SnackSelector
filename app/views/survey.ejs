@@ -28,27 +28,35 @@
     <div class="container theme-showcase" role="main">
 		<div class="page-header">
 			<h1>Survey</h1>
-			</div>
+		</div>
 			
-<ol class="breadcrumb">
-  <li><a href="#">Home</a></li>
-  <li><a href="#">Library</a></li>
-  <li class="active">Data</li>
-</ol>
-			<ul class="list-group">
-  <li class="list-group-item">Cras justo odio</li>
-  <li class="list-group-item">Dapibus ac facilisis in</li>
-  <li class="list-group-item">Morbi leo risus</li>
-  <li class="list-group-item">Porta ac consectetur ac</li>
-  <li class="list-group-item">Vestibulum at eros</li>
+			<ol class="breadcrumb">
+  			<li><a href="#">Taste</a></li>
+  			<li><a href="#">Calories</a></li>
+				<li><a href="#">Data</a></li>
+			</ol>
+			<ul class="list-group options">
+<!--
+  <a href="#" class="list-group-item list-group-item-action">
+		<span class="badge"><span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span></span>
+		Dapibus ac facilisis in</a>
+-->
+		<% for (i = 0; i < options.length; i++) { %> 
+  		<a href="#" class="list-group-item list-group-item-action" id="option<%= i %>"><%= options[i] %></a>
+		<% } %>
+				
+<!--
+		<% options.forEach(function(item) { %> 
+  <a href="#" class="list-group-item list-group-item-action"><%= item %></a>
+		<% }); %>
+-->
 </ul>
 			<% include partials/about.ejs %>
 		</div>
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-		 <script src="/reload/reload.js"></script> 
+    <% include partials/scripts.ejs %>
+		<% console.log(options) %>
+		<script src="/js/surveyrelay.js"></script>
+		<script src="/socket.io/socket.io.js"></script>
+
   </body>
 </html>
