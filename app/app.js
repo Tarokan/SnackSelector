@@ -25,25 +25,50 @@ io.attach(server);
 io.on('connection', function(socket) {
 	var date = new Date();
   console.log(date+' : a user connected '+socket.id);
-	fs.writeFileSync(__dirname + '/data/' + socket.id + '.json', "", 'utf8');
+	
+	//define where the user's data is stored
+	var userPath = __dirname + '/data/' + socket.id + '.json';
+	
+	var template = {
+		"current" : 1,
+		"data"	: [
+			
+		]
+	};
+	var jsondata = JSON.stringify(template);
+	fs.writeFileSync(userPath, jsondata, 'utf8');
+	
+	
+	questionContent = getQuestions(userPath);
+	console.log(questionContent.calories);
+	io.emit('updateQuestion', questionContent);
+	
 	
 	socket.on('disconnect', function(){
-//		try {
 		fs.unlinkSync(__dirname + '/data/' + socket.id + '.json');
-//		} catch (e) {
-//			console.log(e.toString());
-//		}
     console.log('user disconnected');
   });
 	
-	socket.on('questionloaded', function(data) {
-		console.log(socket.id + ' arrived at question');
+	socket.on('clicked', function(data) {
+		console.log(socket.id + ' clicked option' + data);
+		writeAnswer(userPath, data);
 	});
 	
-	socket.on('clicked', function(data) {
-		console.log(socket.id + ' clicked something');
-		var asdf = socket.id
-	});
 });
+
+function getQuestions(path) {
+	var contents = fs.readFileSync(path);
+ 	var jsonContent = JSON.parse(contents);
+	var questions = fs.readFileSync(__dirname + '/data/' + jsonContent.current + '.json');
+	return JSON.parse(questions);
+}
+
+function writeAnswer(path, data) {
+		var contents = fs.readFileSync(path);
+		var jsonContent = JSON.parse(contents);
+	console.log(data);
+		jsonContent.data[0] = {"calories" : data};
+		fs.writeFileSync(path, JSON.stringify(jsonContent), 'utf8');
+}
 
 reload(server, app);
