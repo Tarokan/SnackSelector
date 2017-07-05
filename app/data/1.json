@@ -1,0 +1,10 @@
+{
+	"name": "Flavor",
+	"options": [
+		" Salty/Savory",
+		" Sweet - Fruity",
+		" Sweet - Sugary",
+		" Sour",
+		" Bitter"
+	]
+}

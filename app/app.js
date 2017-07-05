@@ -1,6 +1,5 @@
 var express = require('express');
 var reload = require('reload');
-var dataFile = require('./data/1.json');
 var app = express();
 var fs = require('fs');
 var io = require('socket.io')();
@@ -12,7 +11,6 @@ app.set('views', 'app/views');
 app.use(express.static('app/public'));
 app.use(require('./routes/index'));
 app.use(require('./routes/survey'));
-app.set('surveyData', dataFile);
 
 app.locals.siteTitle = 'Snack Selector';
 
@@ -30,9 +28,8 @@ io.on('connection', function(socket) {
 	var userPath = __dirname + '/data/' + socket.id + '.json';
 	
 	var template = {
-		"current" : 1,
+		"current" : 0,
 		"data"	: [
-			
 		]
 	};
 	var jsondata = JSON.stringify(template);
@@ -41,7 +38,7 @@ io.on('connection', function(socket) {
 	
 	questionContent = getQuestions(userPath);
 	console.log(questionContent.calories);
-	io.emit('updateQuestion', questionContent);
+	io.emit('setQuestions', questionContent);
 	
 	
 	socket.on('disconnect', function(){
@@ -52,6 +49,8 @@ io.on('connection', function(socket) {
 	socket.on('clicked', function(data) {
 		console.log(socket.id + ' clicked option' + data);
 		writeAnswer(userPath, data);
+		questionContent = getQuestions(userPath);
+		io.emit('changeQuestions', questionContent);
 	});
 	
 });
@@ -66,8 +65,13 @@ function getQuestions(path) {
 function writeAnswer(path, data) {
 		var contents = fs.readFileSync(path);
 		var jsonContent = JSON.parse(contents);
-	console.log(data);
-		jsonContent.data[0] = {"calories" : data};
+		console.log(data);
+	
+		var questions = fs.readFileSync(__dirname + '/data/' + jsonContent.current + '.json');
+		var questionsObj = JSON.parse(questions);
+		var name = questionsObj.name;
+		jsonContent.data[jsonContent.current] = {name : data};
+		jsonContent.current = jsonContent.current + 1;
 		fs.writeFileSync(path, JSON.stringify(jsonContent), 'utf8');
 }
 
