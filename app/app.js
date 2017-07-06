@@ -13,6 +13,7 @@ app.use(require('./routes/index'));
 app.use(require('./routes/survey'));
 
 app.locals.siteTitle = 'Snack Selector';
+app.locals.surveyTotal = 5;
 
 var server = app.listen(app.get('port'), function() {
   console.log('Listening on ports: ' + app.get('port'));
