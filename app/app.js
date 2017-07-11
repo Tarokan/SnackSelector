@@ -11,14 +11,20 @@ app.set('views', 'app/views');
 app.use(express.static('app/public'));
 app.use(require('./routes/index'));
 app.use(require('./routes/survey'));
+app.use(require('./routes/test'));
 
 app.locals.siteTitle = 'Snack Selector';
-app.locals.surveyTotal = 5;
+
+//dictate number of questions
+var surveyTotal = 3;
+
+var questionRaw = fs.readFileSync(__dirname + '/data/questions.json');
+var questionData = JSON.parse(questionRaw);
 
 var server = app.listen(app.get('port'), function() {
   console.log('Listening on ports: ' + app.get('port'));
 });
-
+	
 io.attach(server);
 
 io.on('connection', function(socket) {
@@ -37,8 +43,7 @@ io.on('connection', function(socket) {
 	fs.writeFileSync(userPath, jsondata, 'utf8');
 	
 	
-	questionContent = getQuestions(userPath);
-	console.log(questionContent.calories);
+	var questionContent = getQuestions(userPath, 0);
 	io.emit('setQuestions', questionContent);
 	
 	
@@ -50,30 +55,34 @@ io.on('connection', function(socket) {
 	socket.on('clicked', function(data) {
 		console.log(socket.id + ' clicked option' + data);
 		writeAnswer(userPath, data);
-		questionContent = getQuestions(userPath);
-		io.emit('changeQuestions', questionContent);
 	});
 	
 });
 
-function getQuestions(path) {
-	var contents = fs.readFileSync(path);
- 	var jsonContent = JSON.parse(contents);
-	var questions = fs.readFileSync(__dirname + '/data/' + jsonContent.current + '.json');
-	return JSON.parse(questions);
+function getQuestions(path, number) {
+	return (questionData.questionSets[number]);
 }
 
 function writeAnswer(path, data) {
 		var contents = fs.readFileSync(path);
 		var jsonContent = JSON.parse(contents);
-		console.log(data);
 	
-		var questions = fs.readFileSync(__dirname + '/data/' + jsonContent.current + '.json');
-		var questionsObj = JSON.parse(questions);
-		var name = questionsObj.name;
-		jsonContent.data[jsonContent.current] = {name : data};
+		var name = questionData.questionSets[jsonContent.current].name;
+		var ob = {};
+	  ob[name] = data;
+	console.log(name);
+	
+	
+		jsonContent.data[jsonContent.current] = ob;
 		jsonContent.current = jsonContent.current + 1;
+		var newQuestions = getQuestions(path, jsonContent.current);
+		io.emit('changeQuestions', newQuestions);
 		fs.writeFileSync(path, JSON.stringify(jsonContent), 'utf8');
+		if(jsonContent.current == surveyTotal) {
+			return true;
+		} else {
+			return false;	
+		}
 }
 
 reload(server, app);

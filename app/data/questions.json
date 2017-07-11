@@ -1,0 +1,53 @@
+{
+	"questionSets": [
+		{
+			"name": "Calories",
+			"description": "About how many calories per serving?",
+			"type": "single",
+			"options": [
+				" 100 calories or less | Diet/Health Conscious Snacks",
+				" 100 to 200 calories | Typical Snacks",
+				" 200 calories or more | Indulgence Snacks",
+				" This is not important to me."
+			]
+		},
+		{
+			"name": "Flavor",
+			"description": "Which flavor is most appealing to you?",
+			"type": "single",
+	"options": [
+		" No particular flavor",
+		" Salty",
+		" Fruity",
+		" Sugary",
+		" Sour",
+		" Bitter",
+		" This is not important to me."
+	]
+},
+		{
+	"name": "Texture",
+			"description": "Which texture is most appealing to you?",
+			"type": "single",
+	"options": [
+		" Crunchy",
+		" Crispy",
+		" Mushy",
+		" Smooth",
+		" This is not important to me."
+	]
+},
+		{
+			"name": "Other",
+			"description": "Any other aspects you care about?",
+			"type": "single",
+			"options": [
+				"Low fat",
+				"High in Protein",
+				"Rich in Vitamins",
+				"High in Fiber"
+			]
+		}
+	
+	]
+}
