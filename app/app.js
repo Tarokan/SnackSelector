@@ -16,7 +16,7 @@ app.use(require('./routes/test'));
 app.locals.siteTitle = 'Snack Selector';
 
 //dictate number of questions
-var surveyTotal = 3;
+var surveyTotal = 4;
 
 var questionRaw = fs.readFileSync(__dirname + '/data/questions.json');
 var questionData = JSON.parse(questionRaw);
@@ -75,14 +75,13 @@ function writeAnswer(path, data) {
 	
 		jsonContent.data[jsonContent.current] = ob;
 		jsonContent.current = jsonContent.current + 1;
-		var newQuestions = getQuestions(path, jsonContent.current);
-		io.emit('changeQuestions', newQuestions);
 		fs.writeFileSync(path, JSON.stringify(jsonContent), 'utf8');
 		if(jsonContent.current == surveyTotal) {
 			return true;
-		} else {
-			return false;	
 		}
+		var newQuestions = getQuestions(path, jsonContent.current);
+		io.emit('changeQuestions', newQuestions);
+
 }
 
 reload(server, app);

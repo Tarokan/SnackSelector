@@ -39,8 +39,8 @@
 },
 		{
 			"name": "Other",
-			"description": "Any other aspects you care about?",
-			"type": "single",
+			"description": "Any other aspects you care about? (Select all that may apply.)",
+			"type": "multiple",
 			"options": [
 				"Low fat",
 				"High in Protein",
