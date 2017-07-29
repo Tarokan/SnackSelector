@@ -16,7 +16,6 @@
 			"description": "Which flavor is most appealing to you?",
 			"type": "single",
 	"options": [
-		" No particular flavor",
 		" Salty",
 		" Fruity",
 		" Sugary",
@@ -45,7 +44,8 @@
 				"Low fat",
 				"High in Protein",
 				"Rich in Vitamins",
-				"High in Fiber"
+				"High in Fiber",
+				"Vegan"
 			]
 		}
 	
