@@ -108,15 +108,37 @@ function analyze(path) {
 	// score calories
 	for(i=0; i < snackDataJson.snacks.length; i++) {
 		console.log(snackDataJson.snacks[i].calories);
-		if(snackDataJson.snacks[i].calories < 100 && userSurveyJson.data.Calories < 2) {
-			scoreList[i] = scoreList[i] + 1;
-			
-			if(snackDataJson.snacks[i].calories < 100 && userSurveyJson.data.Calories < 1) {
-				scoreList[i] = scoreList[i] + 1;
+		
+		if(userSurveyJson.data.Calories == 0) {
+			if(snackDataJson.snacks[i].calories <= 100) {
+				scoreList[i] = scoreList[i] + 3;
+			} else if (snackDataJson.snacks[i].calories >= 160) {
+			} else {
+				scoreList[i] = scoreList[i] + 3 - (snackDataJson.snacks[i].calories - 100) / 20;
+			}
+		}
+
+		if(userSurveyJson.data.Calories == 1) {
+			if(snackDataJson.snacks[i].calories >= 100 && snackDataJson.snacks[i].calories <= 200) {
+				scoreList[i] = scoreList[i] + 3;
+			} else if (snackDataJson.snacks[i].calories > 200) {
+				scoreList[i] = scoreList[i] + 3 - (snackDataJson.snacks[i].calories - 200) / 20;
+				
+			} else if (snackDataJson.snacks[i].calories < 100) {
+				scoreList[i] = scoreList[i] + 3 - (100 - snackDataJson.snacks[i].calories) / 20;
+			}
+		}
+
+		if(userSurveyJson.data.Calories == 2) {
+			if(snackDataJson.snacks[i].calories > 200) {
+				scoreList[i] = scoreList[i] + 3;
+			} else if (snackDataJson.snacks[i].calories > 240) {
+				scoreList[i] = scoreList[i] + 3 - (300 - snackDataJson.snacks[i].calories) / 20;
+			} else  {
 			}
 		}
 	}
-	console.log(scoreList);
+	console.log("post calorie score:" + scoreList);
 	
 	//score flavor
 	for(i=0; i < snackDataJson.snacks.length; i++) {
@@ -129,12 +151,12 @@ function analyze(path) {
 			scoreList[i] = scoreList[i] + 2;
 		}
 	}
-	console.log(scoreList);
+	console.log("post flavor score:" + scoreList);
 	
 	//score texture
 	for(i=0; i < snackDataJson.snacks.length; i++) {
 		if((snackDataJson.snacks[i].texture == "crunchy" && userSurveyJson.data.Texture == 0)
-		 || (snackDataJson.snacks[i].texture == "crispy" && userSurveyJson.data.Texture == 1)
+		 	 || (snackDataJson.snacks[i].texture == "crispy" && userSurveyJson.data.Texture == 1)
 			 || (snackDataJson.snacks[i].texture == "chewy" && userSurveyJson.data.Texture == 2)
 			 || (snackDataJson.snacks[i].texture == "mushy" && userSurveyJson.data.Texture == 3)
 			 || (snackDataJson.snacks[i].texture == "smooth" && userSurveyJson.data.Texture == 3)
@@ -142,10 +164,32 @@ function analyze(path) {
 			scoreList[i] = scoreList[i] + 2;
 		}
 	}
+	console.log("post texture score:" + scoreList);
 	
+	//TOOO extra options
+	
+	//TODO post best options
+	var firstIndex = 0;
+	var firstScore = 0;
+	var secondIndex = 0;
+	var secondScore = 0;
+	
+	for(i=0; i < scoreList.length; i++) {
+		if(scoreList[i] > firstScore) {
+			secondIndex = firstIndex;
+			secondScore = firstScore;
+			firstIndex = i;
+			firstScore = scoreList[i];
+		} else if (scoreList[i] > secondScore) {
+			secondIndex = i;
+			secondScore = scoreList[i];
+		}
+	}
 	
 	console.log(scoreList);
-	
+	console.log("top recommendations" + firstIndex + " and " + secondIndex);
+	console.log(snackDataJson.snacks[firstIndex]);
+	console.log(snackDataJson.snacks[secondIndex]);
 }
 
 reload(server, app);
