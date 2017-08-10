@@ -62,8 +62,9 @@ io.on('connection', function(socket) {
 		if(writeAnswer(userPath, data)) {
 			console.log(socket.id + ' finished the survey');
 			// find stuff
-			analyze(userPath);
-			io.emit('waitForResult');
+			io.emit('waitForResult')
+			var results = analyze(userPath);
+			io.emit('results', results);
 		}
 	});
 	
@@ -188,8 +189,12 @@ function analyze(path) {
 	
 	console.log(scoreList);
 	console.log("top recommendations" + firstIndex + " and " + secondIndex);
-	console.log(snackDataJson.snacks[firstIndex]);
-	console.log(snackDataJson.snacks[secondIndex]);
+	var items = {
+		first: snackDataJson.snacks[firstIndex],
+		second: snackDataJson.snacks[secondIndex]
+	}
+	console.log(items)
+	return items;
 }
 
 reload(server, app);

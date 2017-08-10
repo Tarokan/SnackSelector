@@ -1,7 +1,7 @@
 {
   "snacks": [
     {
-      "name": "Lay's Original",
+      "name": "Lay's Classic",
       "type": "Chips",
       "manufacturer": "Frito-Lay",
       "description": "",
@@ -9,6 +9,7 @@
       "flavor": "salty",
       "texture": "crispy",
       "amazonLink": "https://www.amazon.com/Lays-Classic-Family-Potato-Chips/dp/B01MZANU7D/",
+			"pictureLink": "lays_classic_sq.png",
       "otherProperties": []
     },
     {
@@ -20,6 +21,7 @@
       "flavor": "sweet",
       "texture": "crunchy",
       "amazonlink": "https://www.amazon.com/Oreo-Chocolate-Sandwich-Cookies-19-1-Ounce/dp/B00R2O5JD0/",
+			"pictureLink": "oreo_sq.png",
       "otherProperties": []
     },
     {
@@ -31,6 +33,7 @@
       "flavor": "salty",
       "texture": "crunchy",
       "amazonlink": "https://www.amazon.com/Gardettos-Snack-Reduced-Original-Recipe/dp/B01HTSNVN8/",
+			"pictureLink": "gardettos_sq.png",
       "otherProperties": []
     },
     {
@@ -43,6 +46,7 @@
       "flavor": "salty",
       "texture": "crunchy",
       "amazonlink": "https://www.amazon.com/Club-Crackers-Original-13-7-Ounce/dp/B00FVYF334/",
+			"pictureLink": "keebler_club_sq.png",
       "otherProperties": []
     },
     {
@@ -55,6 +59,7 @@
       "flavor": "salty sweet",
       "texture": "crunchy",
       "amazonlink": "https://www.amazon.com/Wheat-Thins-Crackers-Original-Ounce/dp/B000RLT4AE/",
+			"pictureLink": "wheat_thins_sq.png",
       "otherProperties": []
     },
     {
@@ -68,6 +73,7 @@
       "flavor": "salty",
       "texture": "crunchy",
       "amazonlink": "https://www.amazon.com/Pepperidge-Farm-Goldfish-Cheddar-6-6-Ounce/dp/B004SCSH92/",
+			"pictureLink": "goldfish_sq.png",
       "otherProperties": []
     },
     {

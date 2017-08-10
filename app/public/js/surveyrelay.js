@@ -21,6 +21,17 @@ socket.on('changeQuestions', function(data) {
 
 socket.on('waitForResult', function(data) {
 	$(".surveycontent").children().remove();
+	console.log("waiting for Results");
+});
+
+socket.on('results', function(data) {
+	console.log("results received" + data.first.toString());
+	$.get("resultcontainer.html", function(data) {
+		$("surveycontent").html(data);
+	})
+	$(".surveycontent").append("<p>we recommend" + data.first + "and" + data.second + "</p>")
+		.append("'<img src='images/" + data.first.pictureLink + "' class='img-circle' width='200px' alt='Responsive image'>'");
+	
 });
 
 function updateQuestions(data) {
