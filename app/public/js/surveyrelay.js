@@ -26,11 +26,16 @@ socket.on('waitForResult', function(data) {
 
 socket.on('results', function(data) {
 	console.log("results received" + data.first.toString());
-	$.get("resultcontainer.html", function(data) {
-		$("surveycontent").html(data);
-	})
-	$(".surveycontent").append("<p>we recommend" + data.first + "and" + data.second + "</p>")
-		.append("'<img src='images/" + data.first.pictureLink + "' class='img-circle' width='200px' alt='Responsive image'>'");
+	$('.surveycontent').load("resultcontainer.html", function() {
+
+		$("#firstResultPic").append("<img src='images/" + data.first.pictureLink + "' class='img-circle img-responsive' alt='Top Result Image'>");
+		$("#firstResultText")
+			.append("<h2> <span style='color:#222222'> Best Match: </span><b>" 
+							+ data.first.name + "</b> (" + data.first.manufacturer + ")</h2>"
+						 + "<h3>Type: " + data.first.type + "</h3><h4>" + data.first.description + "</h4>")
+		  .append('<a href="' + data.first.amazonLink + '" target="_blank" class="btn btn-info"  role="button">Shop on Amazon<span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>	</a>');
+		$("#firstResultText").addClass("vcenter");
+	});
 	
 });
 
