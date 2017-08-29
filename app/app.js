@@ -12,6 +12,7 @@ app.use(express.static('app/public'));
 app.use(require('./routes/index'));
 app.use(require('./routes/survey'));
 app.use(require('./routes/test'));
+app.use(require('./routes/snacklist'));
 
 app.locals.siteTitle = 'Snack Selector';
 const snackDataPath = __dirname + '/data/snacks.json';
@@ -45,6 +46,7 @@ io.on('connection', function(socket) {
 			
 		}
 	};
+	
 	var jsondata = JSON.stringify(template);
 	fs.writeFileSync(userPath, jsondata, 'utf8');
 	
@@ -94,6 +96,7 @@ function writeAnswer(path, data) {
 function initializeData() {
 		var contents = fs.readFileSync(snackDataPath);
 		snackDataJson = JSON.parse(contents);
+		app.locals.questionData = snackDataJson;
 }
 
 function analyze(path) {
@@ -106,11 +109,9 @@ function analyze(path) {
 		scoreList[scoreList.length] = 0;
 	}
 		
-	// score calories
+	//score flavor
 	for(i=0; i < snackDataJson.snacks.length; i++) {
-		console.log(snackDataJson.snacks[i].calories);
-		
-		if(userSurveyJson.data.Calories == 0) {
+				if(userSurveyJson.data.Calories == 0) {
 			if(snackDataJson.snacks[i].calories <= 100) {
 				scoreList[i] = scoreList[i] + 3;
 			} else if (snackDataJson.snacks[i].calories >= 160) {
@@ -138,63 +139,52 @@ function analyze(path) {
 			} else  {
 			}
 		}
-	}
-	console.log("post calorie score:" + scoreList);
-	
-	//score flavor
-	for(i=0; i < snackDataJson.snacks.length; i++) {
+		
 		if((snackDataJson.snacks[i].flavor == "salty" && userSurveyJson.data.Flavor == 0)
 		 || (snackDataJson.snacks[i].flavor == "fruity" && userSurveyJson.data.Flavor == 1)
 			 || (snackDataJson.snacks[i].flavor == "sugary" && userSurveyJson.data.Flavor == 2)
 			 || (snackDataJson.snacks[i].flavor == "sour" && userSurveyJson.data.Flavor == 3)
 			 || (snackDataJson.snacks[i].flavor == "bitter" && userSurveyJson.data.Flavor == 4)
 			) {
-			scoreList[i] = scoreList[i] + 2;
+			scoreList[i] = scoreList[i] + 3;
 		}
-	}
-	console.log("post flavor score:" + scoreList);
-	
-	//score texture
-	for(i=0; i < snackDataJson.snacks.length; i++) {
 		if((snackDataJson.snacks[i].texture == "crunchy" && userSurveyJson.data.Texture == 0)
 		 	 || (snackDataJson.snacks[i].texture == "crispy" && userSurveyJson.data.Texture == 1)
 			 || (snackDataJson.snacks[i].texture == "chewy" && userSurveyJson.data.Texture == 2)
 			 || (snackDataJson.snacks[i].texture == "mushy" && userSurveyJson.data.Texture == 3)
 			 || (snackDataJson.snacks[i].texture == "smooth" && userSurveyJson.data.Texture == 3)
 			) {
-			scoreList[i] = scoreList[i] + 2;
+			scoreList[i] = scoreList[i] + 3;
 		}
+		
+		//TODO extra options
+		for(j=0; j < snackDataJson.snacks[i].otherProperties.length; j++) {
+			for(k=0; k < userSurveyJson.data.Other.length; k++) {
+				if(snackDataJson.snacks[i].otherProperties[j] == userSurveyJson.data.Other[k]) {
+					scoreList[i] = scoreList[i] + 2;
+				}
+			}
+		}
+		
 	}
-	console.log("post texture score:" + scoreList);
-	
-	//TOOO extra options
-	
-	//TODO post best options
-	var firstIndex = 0;
-	var firstScore = 0;
-	var secondIndex = 0;
-	var secondScore = 0;
-	
-	for(i=0; i < scoreList.length; i++) {
-		if(scoreList[i] > firstScore) {
-			secondIndex = firstIndex;
-			secondScore = firstScore;
-			firstIndex = i;
-			firstScore = scoreList[i];
-		} else if (scoreList[i] > secondScore) {
-			secondIndex = i;
-			secondScore = scoreList[i];
+
+	scoreList.unshift(0);
+	var topFive = {data: []};
+	for(i=0; i < 5; i++) {
+		var indexOfHighest = 0;
+		for(j=1; j < scoreList.length; j++) {
+			if(scoreList[indexOfHighest] != undefined && scoreList[j] > scoreList[indexOfHighest]) {
+				indexOfHighest = j;
+			}
 		}
+		topFive.data[i] = snackDataJson.snacks[indexOfHighest - 1];
+		delete scoreList[indexOfHighest];
 	}
 	
 	console.log(scoreList);
-	console.log("top recommendations" + firstIndex + " and " + secondIndex);
-	var items = {
-		first: snackDataJson.snacks[firstIndex],
-		second: snackDataJson.snacks[secondIndex]
-	}
-	console.log(items)
-	return items;
+	console.log(topFive);
+	
+	return topFive;
 }
 
 reload(server, app);

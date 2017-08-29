@@ -10,63 +10,63 @@
       "texture": "crispy",
       "amazonLink": "https://www.amazon.com/Lays-Classic-Family-Potato-Chips/dp/B01MZANU7D/",
 			"pictureLink": "lays_classic_sq.png",
-      "otherProperties": []
+      "otherProperties": [5]
     },
     {
       "name": "Oreos",
       "type": "Cookies",
       "manufacturer": "Nabisco",
-      "description": "",
+      "description": "A sandwich with a soft, creamy center surrounded by two chocolatey cookies.  Serve with milk for an instant classic.",
       "calories": 160,
       "flavor": "sweet",
       "texture": "crunchy",
       "amazonlink": "https://www.amazon.com/Oreo-Chocolate-Sandwich-Cookies-19-1-Ounce/dp/B00R2O5JD0/",
 			"pictureLink": "oreo_sq.png",
-      "otherProperties": []
+      "otherProperties": [5]
     },
     {
       "name": "Gardetto's",
       "type": "Snack Mix",
       "manufacturer": "General Mills",
-      "description": "",
+      "description": "A salty mix of various bits of pretzels, bagel chips, and small biscuits.  Similar to Chex Mix.",
       "calories": 150,
       "flavor": "salty",
       "texture": "crunchy",
       "amazonlink": "https://www.amazon.com/Gardettos-Snack-Reduced-Original-Recipe/dp/B01HTSNVN8/",
 			"pictureLink": "gardettos_sq.png",
-      "otherProperties": []
+      "otherProperties": [5]
     },
     {
       "name": "Keebler Club",
       "type": "Crackers",
       "manufacturer": "General Mills",
-      "description": "",
+      "description": "Simple, flaky crakers that go well with almost everything.  Commonly served with cheese, or eaten plain.  Low calorie!",
       "calories": 70,
       "fat_grams": 3,
       "flavor": "salty",
       "texture": "crunchy",
       "amazonlink": "https://www.amazon.com/Club-Crackers-Original-13-7-Ounce/dp/B00FVYF334/",
 			"pictureLink": "keebler_club_sq.png",
-      "otherProperties": []
+      "otherProperties": [5]
     },
     {
       "name": "Wheat Thins Original",
       "type": "Crackers",
       "manufacturer": "Nabisco",
-      "description": "",
+      "description": "A crunchy chip made with whole grain.  Comes in various flavors, but generally have a salty impression with a sweet aftertaste.",
       "calories": 140,
       "fat_grams": 5,
       "flavor": "salty sweet",
       "texture": "crunchy",
       "amazonlink": "https://www.amazon.com/Wheat-Thins-Crackers-Original-Ounce/dp/B000RLT4AE/",
 			"pictureLink": "wheat_thins_sq.png",
-      "otherProperties": []
+      "otherProperties": [5, 6]
     },
     {
       "name": "Goldfish Original",
       "type": "Crackers",
       "manufacturer": "Pepperidge Farms",
-      "description": "",
+      "description": "Nibble sized cheese crackers shaped as fish.  Great for sharing with kids.",
       "calories": 140,
       "serving_size": 30,
       "fat_grams": 5,
@@ -74,52 +74,55 @@
       "texture": "crunchy",
       "amazonlink": "https://www.amazon.com/Pepperidge-Farm-Goldfish-Cheddar-6-6-Ounce/dp/B004SCSH92/",
 			"pictureLink": "goldfish_sq.png",
-      "otherProperties": []
+      "otherProperties": [5]
     },
     {
       "name": "Ritz",
       "type": "Crackers",
       "manufacturer": "Nabisco",
-      "description": "",
+      "description": "Crunchy crackers with a bite, with a little bit of salt added. Often eaten with meats or cheeses.",
       "calories": 80,
       "serving_size": 16,
       "fat_grams": 4.5,
       "flavor": "salty",
       "texture": "crunchy",
       "amazonlink": "https://www.amazon.com/Ritz-Crackers-Original-13-7-Ounce-Box/dp/B00G4U6UY0/",
-      "otherProperties": []
+			"pictureLink": "ritz_sq.png",
+      "otherProperties": [5]
     },
     {
       "name": "Premium Saltine Crackers Original",
       "type": "Crackers",
       "manufacturer": "Nabisco",
-      "description": "",
+      "description": "The most popular saltine brand on the market.  It is low calorie and contains minimal salt.  Goes great with soups!",
       "calories": 70,
       "serving_size": 15,
       "fat_grams": 1.5,
       "flavor": "salty",
       "texture": "crunchy",
       "amazonlink": "https://www.amazon.com/Premium-Saltine-Crackers-Original-Ounce/dp/B00VHVK8AI/",
-      "otherProperties": []
+			"pictureLink": "premium_sq.png",
+      "otherProperties": [0, 5]
     },
     {
       "name": "Triscuit",
       "type": "Crackers",
       "manufacturer": "Nabisco",
-      "description": "",
+      "description": "A crunchy whole grain biscuit with a unique crunchy and crumbly texture.  Comes in a variety of flavors, and can be served with toppings.",
       "calories": 120,
       "serving_size": 28,
       "fat_grams": 3.5,
       "flavor": "salty",
       "texture": "crunchy",
       "amazonlink": "https://www.amazon.com/Triscuits-Crackers-Original-13-Ounce-Family-Size/dp/B018FVNFRU/",
-      "otherProperties": []
+			"pictureLink": "triscuit_sq.png",
+      "otherProperties": [4,5,6]
     },
     {
       "name": "Honey Maid Graham",
       "type": "Crackers",
       "manufacturer": "Nabisco",
-      "description": "",
+      "description": "One of the top graham cracker brands, with a touch of honey. Typically eaten as a s'more (marshmallow and chocolate sandwich)",
       "calories": 130,
       "serving_size": 27,
       "fat_grams": 3,
@@ -127,13 +130,14 @@
       "texture": "crunchy",
       "nutritiondata": "https://www.fatsecret.com/calories-nutrition/honeymaid/graham-crackers",
       "amazonlink": "https://www.amazon.com/Triscuits-Crackers-Original-13-Ounce-Family-Size/dp/B018FVNFRU/",
-      "otherProperties": []
+			"pictureLink": "honey_maid_sq.png",
+      "otherProperties": [5]
     },
     {
       "name": "Cheez-It",
       "type": "Crackers",
       "manufacturer": "Sunshine",
-      "description": "",
+      "description": "Cheezy squared bite-sized crackers.  Great for sharing and saving for later.  Similar to goldfish, but saltier.",
       "calories": 130,
       "serving_size": 27,
       "fat_grams": 8,
@@ -141,13 +145,14 @@
       "texture": "crunchy",
       "nutritiondata": "https://www.fatsecret.com/calories-nutrition/sunshine/cheez-it-original-snack-crackers",
       "amazonlink": "https://www.amazon.com/Cheez-Baked-Crackers-Original-21-Ounce/dp/B001ONPN5E/",
+			"pictureLink": "cheez-it_sq.png",
       "otherProperties": []
     },
     {
       "name": "Dare Breton Original",
       "type": "Crackers",
       "manufacturer": "Dare",
-      "description": "",
+      "description": "A truly plain cracker that is thin but very crunchy.  Best served with toppings like cheese and other charcuterie.",
       "calories": 90,
       "serving_size": 18,
       "fat_grams": 3.5,
@@ -155,13 +160,14 @@
       "texture": "crunchy",
       "nutritiondata": "https://www.fatsecret.com/calories-nutrition/dare/breton-original-crackers",
       "amazonlink": "https://www.amazon.com/Dare-cfuda-Breton-Original-Crackers/dp/B0010B3CV2/",
+			"pictureLink": "dare_breton_sq.png",
       "otherProperties": []
     },
     {
       "name": "Quaker Chewy Granola Bar - Chocolate",
       "type": "Granola Bar",
       "manufacturer": "Quaker",
-      "description": "",
+      "description": "A classic, chewy granola bar that is great on the go for lunch or a snack.  Cheap, but are not very large if you're feeling hungry.",
       "calories": 100,
       "serving_size": 24,
       "fat_grams": 3.5,
@@ -169,13 +175,14 @@
       "texture": "chewy",
       "nutritiondata": "https://www.fatsecret.com/calories-nutrition/quaker/chewy-granola-bars---chocolate-chip",
       "amazonlink": "https://www.amazon.com/Quaker-Chewy-Granola-Variety-Count/dp/B01MRZZ3KC/",
+			"pictureLink": "quaker_chewy_cc_sq.png",
       "otherProperties": []
     },
     {
       "name": "Nature Valley Crunchy - Oats 'N Honey",
       "type": "Granola Bar",
       "manufacturer": "Nature Valley",
-      "description": "",
+      "description": "A (very) crunchy granola bar with 16g of whole grains.  Great for replenishing energy on a trip.  Has a significant fat, but also quite filling.",
       "calories": 190,
       "serving_size": 42,
       "fat_grams": 7,
@@ -183,21 +190,23 @@
       "texture": "crunchy",
       "nutritiondata": "https://www.fatsecret.com/calories-nutrition/nature-valley/crunchy-granola-bars---oats-n-honey/2-bars",
       "amazonlink": "https://www.amazon.com/Nature-Valley-Crunchy-Granola-98-Count/dp/B000LTM29M/",
-      "otherProperties": []
+			"pictureLink": "nature_valley_hno_sq.png",
+      "otherProperties": [5]
     },
     {
       "name": "KIND Healthy Grains - Dark Chocolate Chunk ",
       "type": "Granola Bar",
       "manufacturer": "Nature Valley",
-      "description": "",
+      "description": "An upcoming chocolatey granola bar packed with various whole grains (amaranth, millet, and quinoa) and vitamins.  Both chewy and crunchy.",
       "calories": 150,
       "serving_size": 35,
       "fat_grams": 5,
       "flavor": "sweet",
-      "texture": "crunchy",
+      "texture": "crunchy chewy",
       "nutritiondata": "https://www.fatsecret.com/calories-nutrition/kind/healthy-grains-dark-chocolate-chunk",
-      "amazonlink": "https://www.amazon.com/Nature-Valley-Crunchy-Granola-98-Count/dp/B000LTM29M/",
-      "otherProperties": []
+      "amazonlink": "https://www.amazon.com/dp/B00DILE11W/",
+			"pictureLink": "kind_dcc_sq.png",
+      "otherProperties": [5]
     },
     {
       "name": "Quaker Chewy Dipps - Chocolate Chip",
@@ -211,13 +220,14 @@
       "texture": "chewy",
       "nutritiondata": "https://www.fatsecret.com/calories-nutrition/kind/healthy-grains-dark-chocolate-chunk",
       "amazonlink": "https://www.amazon.com/Quaker-Chewy-Dipps-6-5-oz/dp/B00099XM0M/",
+			"pictureLink": "quaker_chewy_cc_sq.png",
       "otherProperties": []
     },
     {
       "name": "Junkless Chewy Granola Bars - Cinnamon Roll",
       "type": "Granola Bar",
       "manufacturer": "Junkless",
-      "description": "",
+      "description": "A chewy granola bar that has no artificial flavors, high fructose corn syrup, trans fats, or GMO products.",
       "calories": 130,
       "serving_size": 31,
       "fat_grams": 3.5,
@@ -225,21 +235,23 @@
       "texture": "chewy",
       "nutritiondata": "",
       "amazonlink": "https://www.amazon.com/Junkless-Chewy-Granola-Bars-Cinnamon/dp/B01MFE8IO8/",
-      "otherProperties": []
+			"pictureLink": "junkless_cr_sq.png",
+      "otherProperties": [5]
     },
     {
       "name": "Kashi Crunchy Chia Bar - Chocolate Chip",
       "type": "Granola Bar",
       "manufacturer": "Kashi",
-      "description": "",
+      "description": "Kashi's crunchy granola bar in chocolate flavor.  Contains chia seeds to provide omega-3 oils and is high in whole grains.",
       "calories": 180,
       "serving_size": 40,
       "fat_grams": 7,
       "flavor": "sweet",
       "texture": "chewy",
-      "nutritiondata": "",
+      "nutritiondata": "https://www.fatsecret.com/calories-nutrition/kashi/crunchy-granola-and-seed-bars---chocolate-chip-chia",
       "amazonlink": "https://www.amazon.com/Kashi-Crunchy-Chia-Chocolate-pouches/dp/B00FRDUHKI/",
-      "otherProperties": []
+			"pictureLink": "kashi_ccc_sq.png",
+      "otherProperties": [5]
     }
   ]
 }

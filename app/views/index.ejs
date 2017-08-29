@@ -26,7 +26,7 @@
 
     <div class="container theme-showcase" role="main">
 			<div id="p" class="maincontent">
-
+				<% if(pageID == 'home') { %>
       <!-- Main jumbotron for a primary marketing message or call to action -->
       	<div class="jumbotron">
         	<h1>Find out what you want to eat <i>now.</i></h1>
@@ -34,6 +34,19 @@
 				
 					<a href="/survey" class="btn btn-info" id="gotosurvey" role="button">Take our survey 		<span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>	</a>
 				</div>
+				<% } else if (pageID == 'snacklist') { %>
+					<% for(i = 0; i < questionData.snacks.length; i++) { %>
+						<div class="row snack-list-item">
+							<div class="col-md-3 text-center snack-picture">
+								<img src='images/<%= questionData.snacks[i].pictureLink %>' class='img-circle img-responsive' alt='Result Image'>
+							</div>
+							<div class="col-md-9 snack-text">
+								<h2><b><%= questionData.snacks[i].name %> </b> ( + topFive.data[i+2].manufacturer)</h2>"
+						 + "<h3>Type: " + topFive.data[i+2].type + "</h3><h4>" + topFive.data[i+2].description + "</h4>
+							</div>
+						</div>
+					<% } %>
+				<% } %>
 			</div>
 			<% include partials/about.ejs %>
 

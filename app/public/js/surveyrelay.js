@@ -24,17 +24,43 @@ socket.on('waitForResult', function(data) {
 	console.log("waiting for Results");
 });
 
-socket.on('results', function(data) {
-	console.log("results received" + data.first.toString());
+socket.on('results', function(topFive) {
+	console.log("results received" + topFive.data[0].toString());
 	$('.surveycontent').load("resultcontainer.html", function() {
 
-		$("#firstResultPic").append("<img src='images/" + data.first.pictureLink + "' class='img-circle img-responsive' alt='Top Result Image'>");
+		//first result
+		$("#firstResultPic").append("<img src='images/" + topFive.data[0].pictureLink + "' class='img-circle img-responsive' alt='Top Result Image'>");
 		$("#firstResultText")
-			.append("<h2> <span style='color:#222222'> Best Match: </span><b>" 
-							+ data.first.name + "</b> (" + data.first.manufacturer + ")</h2>"
-						 + "<h3>Type: " + data.first.type + "</h3><h4>" + data.first.description + "</h4>")
-		  .append('<a href="' + data.first.amazonLink + '" target="_blank" class="btn btn-info"  role="button">Shop on Amazon<span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>	</a>');
-		$("#firstResultText").addClass("vcenter");
+			.append("<h2><b>" 
+							+ topFive.data[0].name + "</b> (" + topFive.data[0].manufacturer + ")</h2>"
+						 + "<h3>Type: " + topFive.data[0].type + "</h3><h4>" + topFive.data[0].description + "</h4>")
+		  .append('<a href="' + topFive.data[0].amazonLink + '" target="_blank" class="btn btn-info"  role="button">Shop on Amazon<span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>	</a>');
+		
+		//second result
+		$("#secondResultPic").append("<img src='images/" + topFive.data[1].pictureLink + "' class='img-circle img-responsive' alt='Top Result Image'>");
+		$("#secondResultText")
+			.append("<h2> <b>" 
+							+ topFive.data[1].name + "</b> (" + topFive.data[1].manufacturer + ")</h2>"
+						 + "<h3>Type: " + topFive.data[1].type + "</h3><h4>" + topFive.data[1].description + "</h4>")
+		  .append('<a href="' + topFive.data[1].amazonLink + '" target="_blank" class="btn btn-info"  role="button">Shop on Amazon<span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>	</a>');
+		
+		$("#showMoreButton").on('click', function(e) {
+			event.preventDefault();
+			$("#showMoreButton").hide();
+			$("#other-results").load("defaultcontainer.html", function() {
+			var copyOfElement = $("#other-results").html()
+			$("#other-results").append(copyOfElement).append(copyOfElement);
+				
+				for(i = 0; i < 3; i++) {
+					$(".snack-list-item > .snack-picture:eq(" + i + ")").append("<img src='images/" + topFive.data[i+2].pictureLink + "' class='img-circle img-responsive' alt='Result Image'>")
+					$(".snack-list-item > .snack-text:eq(" + i + ")").append("<h2> <b>" 
+							+ topFive.data[i+2].name + "</b> (" + topFive.data[i+2].manufacturer + ")</h2>"
+						 + "<h3>Type: " + topFive.data[i+2].type + "</h3><h4>" + topFive.data[i+2].description + "</h4>")
+		  .append('<a href="' + topFive.data[i+2].amazonLink + '" target="_blank" class="btn btn-info"  role="button">Shop on Amazon<span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>	</a>');
+				}
+		});
+		});
+
 	});
 	
 });
