@@ -13,6 +13,7 @@ app.use(require('./routes/index'));
 app.use(require('./routes/survey'));
 app.use(require('./routes/test'));
 app.use(require('./routes/snacklist'));
+app.use(require('./routes/about'));
 
 app.locals.siteTitle = 'Snack Selector';
 const snackDataPath = __dirname + '/data/snacks.json';

@@ -1,0 +1,10 @@
+					<% for(i = 0; i < questionData.snacks.length; i++) { %>
+						<div class="row snack-list-item">
+							<div class="col-md-3 text-center snack-picture">
+								<img src='images/<%= questionData.snacks[i].pictureLink %>' class='img-circle img-responsive' alt='Result Image'>
+							</div>
+							<div class="col-md-9 snack-text">
+								<h2><b><%= questionData.snacks[i].name %></b> (<%= questionData.snacks[i].name %>)</h2><h3>Type: <%= questionData.snacks[i].type %></h3><h4><%= questionData.snacks[i].description %></h4>
+							</div>
+						</div>
+					<% } %>
