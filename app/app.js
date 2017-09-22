@@ -3,8 +3,8 @@ var reload = require('reload');
 var app = express();
 var fs = require('fs');
 var io = require('socket.io')();
-
-app.set('port', 3000);
+port = process.env.PORT || '3000';
+app.set('port', port);
 app.set('view engine', 'ejs');
 app.set('views', 'app/views');
 

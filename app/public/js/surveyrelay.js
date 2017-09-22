@@ -1,3 +1,6 @@
+// Handles DOM manipulation using jQuery and listens to the
+// web socket according to different events.
+
 var socket = io();
 
 var $optionList = $('.options');
@@ -26,9 +29,10 @@ socket.on('waitForResult', function(data) {
 
 socket.on('results', function(topFive) {
 	console.log("results received" + topFive.data[0].toString());
+	//get predefined container for results
 	$('.surveycontent').load("resultcontainer.html", function() {
 
-		//first result
+		// populate first result
 		$("#firstResultPic").append("<img src='images/" + topFive.data[0].pictureLink + "' class='img-circle img-responsive' alt='Top Result Image'>");
 		$("#firstResultText")
 			.append("<h2><b>" 
@@ -36,7 +40,7 @@ socket.on('results', function(topFive) {
 						 + "<h3>Type: " + topFive.data[0].type + "</h3><h4>" + topFive.data[0].description + "</h4>")
 		  .append('<a href="' + topFive.data[0].amazonLink + '" target="_blank" class="btn btn-info"  role="button">Shop on Amazon<span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>	</a>');
 		
-		//second result
+		// populate second result
 		$("#secondResultPic").append("<img src='images/" + topFive.data[1].pictureLink + "' class='img-circle img-responsive' alt='Top Result Image'>");
 		$("#secondResultText")
 			.append("<h2> <b>" 
@@ -44,6 +48,7 @@ socket.on('results', function(topFive) {
 						 + "<h3>Type: " + topFive.data[1].type + "</h3><h4>" + topFive.data[1].description + "</h4>")
 		  .append('<a href="' + topFive.data[1].amazonLink + '" target="_blank" class="btn btn-info"  role="button">Shop on Amazon<span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>	</a>');
 		
+		//show more results if the user clicks to see more
 		$("#showMoreButton").on('click', function(e) {
 			event.preventDefault();
 			$("#showMoreButton").hide();

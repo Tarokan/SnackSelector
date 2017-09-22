@@ -4,8 +4,7 @@
   "description": "building a website",
   "main": "app/app.js",
   "scripts": {
-    "start": "nodemon --ignore app/data",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app/app.js"
   },
   "author": "Nick Leung",
   "license": "ISC",
