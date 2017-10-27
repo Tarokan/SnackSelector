@@ -1,14 +1,32 @@
+/**
+ *	@file Snack Selector Main Application.  
+ *  Requires Node.js v6.10.3 or newer
+ *	
+ *	Required dependedencies are listed in package.json	
+ *  @author Nicholas Leung <nl3@illinois.edu>
+**/
+
+// Module Instantiation
 var express = require('express');
 var reload = require('reload');
 var app = express();
 var fs = require('fs');
 var io = require('socket.io')();
+<<<<<<< HEAD
 port = process.env.PORT || '3000';
+=======
+
+
+var port = process.env.PORT || 3000;
+>>>>>>> temp
 app.set('port', port);
 app.set('view engine', 'ejs');
 app.set('views', 'app/views');
 
+//define location of public resources
 app.use(express.static('app/public'));
+
+//Routing
 app.use(require('./routes/index'));
 app.use(require('./routes/survey'));
 app.use(require('./routes/test'));
@@ -19,9 +37,8 @@ app.locals.siteTitle = 'Snack Selector';
 const snackDataPath = __dirname + '/data/snacks.json';
 var snackDataJson;
 
-//dictate number of questions
+//Number of questions
 var surveyTotal = 4;
-
 var questionRaw = fs.readFileSync(__dirname + '/data/questions.json');
 var questionData = JSON.parse(questionRaw);
 
@@ -29,10 +46,12 @@ var server = app.listen(app.get('port'), function() {
   console.log('Listening on ports: ' + app.get('port'));
 });
 
-initializeData();
 console.log(snackDataJson);
 io.attach(server);
 
+/*************************/
+/*     SOCKET HANDLER     /
+/*************************/
 io.on('connection', function(socket) {
 	var date = new Date();
   console.log(date+' : a user connected '+socket.id);
@@ -47,13 +66,13 @@ io.on('connection', function(socket) {
 			
 		}
 	};
-	
 	var jsondata = JSON.stringify(template);
+	
+	// Create the user's response file.
 	fs.writeFileSync(userPath, jsondata, 'utf8');
 	
-	var questionContent = getQuestions(userPath, 0);
+	var questionContent = getQuestions(0);
 	io.emit('setQuestions', questionContent);
-	
 	
 	socket.on('disconnect', function(){
 		fs.unlinkSync(__dirname + '/data/' + socket.id + '.json');
@@ -73,10 +92,21 @@ io.on('connection', function(socket) {
 	
 });
 
-function getQuestions(path, number) {
+/**
+ * Returns a question specified by the number.
+ * @param {number} number Index of Question
+ * @return {JSON} Question data
+ */
+function getQuestions(number) {
 	return (questionData.questionSets[number]);
 }
 
+/**
+ * Writes the answer to the user's socket file.
+ * @param {string} path Path the user's file
+ * @param {data} data Data to be written into file
+ * @return {boolean} true if the user has completed all questions, false otherwise
+ */
 function writeAnswer(path, data) {
 		var contents = fs.readFileSync(path);
 		var jsonContent = JSON.parse(contents);
@@ -89,17 +119,16 @@ function writeAnswer(path, data) {
 		if(jsonContent.current == surveyTotal) {
 			return true;
 		}
-		var newQuestions = getQuestions(path, jsonContent.current);
+		var newQuestions = getQuestions(jsonContent.current);
 		io.emit('changeQuestions', newQuestions);
 		return false;
 }
 
-function initializeData() {
-		var contents = fs.readFileSync(snackDataPath);
-		snackDataJson = JSON.parse(contents);
-		app.locals.questionData = snackDataJson;
-}
-
+/**
+ * Scores the user's preferences against the snack database.
+ * @param {string} path Path to the user's response file.
+ * @return {Array} array of top five recommendations
+ */
 function analyze(path) {
 	var contents = fs.readFileSync(path);
 	var userSurveyJson = JSON.parse(contents);
